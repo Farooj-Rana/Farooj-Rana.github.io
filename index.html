@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Farooj Rana</title>
+    <title>Farooj Rana | Authentic Middle Eastern Cuisine</title>
+    <meta name="description" content="Experience authentic Middle Eastern cuisine at Farooj Rana. Fresh ingredients, traditional recipes, unforgettable taste.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <h1 class="logo">Farooj<span>Rana</span></h1>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#specialties">Specialties</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="menu-toggle">
@@ -26,133 +36,138 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Hello, I'm <span>Farooj Rana</span></h1>
-                <h2>Web Developer & Designer</h2>
-                <p>Creating beautiful, functional websites and applications.</p>
+                <h1 id="hero-heading">Experience Authentic Middle Eastern Cuisine</h1>
+                <h2 id="hero-subheading">Fresh ingredients, traditional recipes, unforgettable taste</h2>
                 <div class="cta-buttons">
-                    <a href="#projects" class="btn primary-btn">View My Work</a>
-                    <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                    <a href="#menu" class="btn primary-btn" id="hero-cta">View Our Menu</a>
+                    <a href="#contact" class="btn secondary-btn">Reserve a Table</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">Our Story</h2>
             <div class="about-content">
+                <div class="about-image">
+                    <img src="https://source.unsplash.com/random/600x600/?restaurant-chef" alt="Farooj Rana Chef" id="about-image">
+                </div>
                 <div class="about-text">
-                    <p>I'm a passionate web developer with expertise in creating responsive and user-friendly websites. With a strong foundation in both frontend and backend technologies, I enjoy turning complex problems into simple, beautiful solutions.</p>
-                    <p>When I'm not coding, you can find me exploring new technologies, contributing to open source projects, or enjoying outdoor activities.</p>
+                    <h2 id="about-heading">Our Story</h2>
+                    <p id="about-paragraph-1">Founded in 2010, Farooj Rana brings the authentic flavors of Middle Eastern cuisine to your table. Our recipes have been passed down through generations, preserving the traditional taste and cooking methods.</p>
+                    <p id="about-paragraph-2">We take pride in using only the freshest ingredients, locally sourced whenever possible, and preparing everything from scratch daily. Our commitment to quality and authenticity has made us a favorite dining destination in the community.</p>
+                    <a href="#contact" class="btn primary-btn">Reserve a Table</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <!-- Specialties Section -->
+    <section id="specialties" class="specialties">
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Frontend Development</h3>
-                    <p>HTML, CSS, JavaScript, React</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Backend Development</h3>
-                    <p>Node.js, Express, MongoDB</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-paint-brush"></i>
-                    <h3>UI/UX Design</h3>
-                    <p>Figma, Adobe XD, Responsive Design</p>
-                </div>
+            <h2 class="section-title">Our Specialties</h2>
+            <div class="specialties-grid" id="specialties-container">
+                <!-- Specialties will be loaded from config.js -->
             </div>
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
         <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>E-Commerce Website</h3>
-                    <p>A full-stack e-commerce platform with payment integration.</p>
-                    <div class="project-tags">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn sm-btn">Live Demo</a>
-                        <a href="#" class="btn sm-btn secondary-btn">GitHub</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>Task Management App</h3>
-                    <p>A productivity app to organize and track your daily tasks.</p>
-                    <div class="project-tags">
-                        <span>JavaScript</span>
-                        <span>CSS</span>
-                        <span>LocalStorage</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn sm-btn">Live Demo</a>
-                        <a href="#" class="btn sm-btn secondary-btn">GitHub</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>Portfolio Website</h3>
-                    <p>A responsive portfolio website to showcase projects.</p>
-                    <div class="project-tags">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn sm-btn">Live Demo</a>
-                        <a href="#" class="btn sm-btn secondary-btn">GitHub</a>
-                    </div>
-                </div>
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-tabs" id="menu-tabs">
+                <div class="menu-tab active" data-category="all">All</div>
+                <!-- Menu categories will be loaded from config.js -->
+            </div>
+            <div class="menu-items" id="menu-items">
+                <!-- Menu items will be loaded from config.js -->
             </div>
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Gallery items will be loaded from config.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-slider" id="testimonials-slider">
+                <!-- Testimonials will be loaded from config.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>email@example.com</p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p id="contact-address">123 Culinary Street, Foodville, FD 12345</p>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>New York, NY</p>
+                        <i class="fas fa-phone"></i>
+                        <p id="contact-phone">+1 (123) 456-7890</p>
                     </div>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p id="contact-email">info@faroojrana.com</p>
+                    </div>
+                    
+                    <div class="contact-hours">
+                        <h3>Opening Hours</h3>
+                        <div class="hours-list" id="opening-hours">
+                            <!-- Opening hours will be loaded from config.js -->
+                        </div>
+                    </div>
+                    
+                    <div class="social-links" id="social-links">
+                        <!-- Social links will be loaded from config.js -->
                     </div>
                 </div>
+                
                 <form class="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Your Message" required></textarea>
+                        <label for="phone">Your Phone</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject">
+                            <option value="reservation">Table Reservation</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="catering">Catering Inquiry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" placeholder="Enter your message" required></textarea>
                     </div>
                     <button type="submit" class="btn primary-btn">Send Message</button>
                 </form>
@@ -160,12 +175,158 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2023 Farooj Rana. All Rights Reserved.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Farooj Rana</h3>
+                    <p>Experience the authentic flavors of Middle Eastern cuisine in a warm and welcoming atmosphere.</p>
+                    <div class="footer-social" id="footer-social">
+                        <!-- Social links will be loaded from config.js -->
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="footer-address">123 Culinary Street, Foodville, FD 12345</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span id="footer-phone">+1 (123) 456-7890</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span id="footer-email">info@faroojrana.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2023</span> Farooj Rana. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Populate content from config
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero section
+            document.getElementById('hero-heading').textContent = config.hero.heading;
+            document.getElementById('hero-subheading').textContent = config.hero.subheading;
+            document.querySelector('#hero-cta').textContent = config.hero.ctaText;
+            
+            // About section
+            document.getElementById('about-heading').textContent = config.about.heading;
+            document.getElementById('about-paragraph-1').textContent = config.about.paragraphs[0];
+            document.getElementById('about-paragraph-2').textContent = config.about.paragraphs[1];
+            
+            // Specialties section
+            const specialtiesContainer = document.getElementById('specialties-container');
+            config.specialties.forEach(specialty => {
+                const specialtyCard = document.createElement('div');
+                specialtyCard.className = 'specialty-card';
+                specialtyCard.innerHTML = `
+                    <div class="specialty-image">
+                        <img src="${specialty.imageUrl}" alt="${specialty.name}">
+                    </div>
+                    <div class="specialty-content">
+                        <h3>${specialty.name}</h3>
+                        <p>${specialty.description}</p>
+                    </div>
+                `;
+                specialtiesContainer.appendChild(specialtyCard);
+            });
+            
+            // Menu tabs
+            const menuTabs = document.getElementById('menu-tabs');
+            config.menuCategories.forEach(category => {
+                const tab = document.createElement('div');
+                tab.className = 'menu-tab';
+                tab.dataset.category = category.id;
+                tab.textContent = category.name;
+                menuTabs.appendChild(tab);
+            });
+            
+            // Gallery
+            const galleryContainer = document.getElementById('gallery-container');
+            config.galleryImages.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `<img src="${image}" alt="Gallery Image">`;
+                galleryContainer.appendChild(galleryItem);
+            });
+            
+            // Contact info
+            document.getElementById('contact-address').textContent = config.address;
+            document.getElementById('contact-phone').textContent = config.phone;
+            document.getElementById('contact-email').textContent = config.email;
+            
+            // Footer info
+            document.getElementById('footer-address').textContent = config.address;
+            document.getElementById('footer-phone').textContent = config.phone;
+            document.getElementById('footer-email').textContent = config.email;
+            
+            // Opening hours
+            const hoursContainer = document.getElementById('opening-hours');
+            for (const [day, hours] of Object.entries(config.openingHours)) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.textContent = day.charAt(0).toUpperCase() + day.slice(1) + ':';
+                
+                const timeElement = document.createElement('div');
+                timeElement.className = 'time';
+                timeElement.textContent = hours;
+                
+                hoursContainer.appendChild(dayElement);
+                hoursContainer.appendChild(timeElement);
+            }
+            
+            // Social links in contact section
+            const socialLinks = document.getElementById('social-links');
+            for (const [platform, url] of Object.entries(config.socialMedia)) {
+                const link = document.createElement('a');
+                link.href = url;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.innerHTML = `<i class="fab fa-${platform}"></i>`;
+                socialLinks.appendChild(link);
+            }
+            
+            // Social links in footer
+            const footerSocial = document.getElementById('footer-social');
+            for (const [platform, url] of Object.entries(config.socialMedia)) {
+                const link = document.createElement('a');
+                link.href = url;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.innerHTML = `<i class="fab fa-${platform}"></i>`;
+                footerSocial.appendChild(link);
+            }
+        });
+    </script>
 </body>
 </html> 

@@ -7,13 +7,13 @@ const config = {
   phone: "0535177327",
   email: "info@faroojrana.com",
   openingHours: {
-    monday: "11:00 AM - 11:00 PM",
-    tuesday: "11:00 AM - 11:00 PM",
-    wednesday: "11:00 AM - 11:00 PM",
-    thursday: "11:00 AM - 11:00 PM",
-    friday: "11:00 AM - 12:00 AM",
-    saturday: "10:00 AM - 12:00 AM",
-    sunday: "10:00 AM - 11:00 PM",
+    monday: "4:30 PM - 4:00 AM",
+    tuesday: "4:30 PM - 4:00 AM",
+    wednesday: "4:30 PM - 4:00 AM",
+    thursday: "4:30 PM - 4:00 AM",
+    friday: "4:30 PM - 4:00 AM",
+    saturday: "4:30 PM - 4:00 AM",
+    sunday: "4:30 PM - 4:00 AM",
   },
 
   // Social Media Links

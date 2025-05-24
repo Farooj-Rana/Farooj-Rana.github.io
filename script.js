@@ -106,54 +106,212 @@ function initHeaderScroll() {
   window.addEventListener("scroll", requestTick, { passive: true });
 }
 
-// Enhanced Mobile Menu with animations
+// Enhanced Mobile Menu with animations and touch support
 function initMobileMenu() {
   const menuToggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
   const navItems = document.querySelectorAll(".nav-links a");
+  const body = document.body;
 
   if (!menuToggle || !navLinks) return;
 
-  menuToggle.addEventListener("click", () => {
+  // Toggle menu function
+  function toggleMenu(forceClose = false) {
     const isActive = navLinks.classList.contains("active");
 
-    navLinks.classList.toggle("active");
-    menuToggle.classList.toggle("active");
-
-    // Animate menu items
-    if (!isActive) {
-      navItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add("slide-in-left");
-        }, index * 100);
-      });
-    }
-
-    // Toggle body scroll
-    document.body.style.overflow = isActive ? "auto" : "hidden";
-  });
-
-  // Close mobile menu when clicking on a nav link
-  navItems.forEach((link) => {
-    link.addEventListener("click", () => {
+    if (forceClose || isActive) {
+      // Close menu
       navLinks.classList.remove("active");
       menuToggle.classList.remove("active");
-      document.body.style.overflow = "auto";
+      body.style.overflow = "auto";
+      body.classList.remove("menu-open");
 
+      // Remove animation classes from menu items
       navItems.forEach((item) => {
         item.classList.remove("slide-in-left");
       });
+    } else {
+      // Open menu
+      navLinks.classList.add("active");
+      menuToggle.classList.add("active");
+      body.style.overflow = "hidden";
+      body.classList.add("menu-open");
+
+      // Animate menu items with staggered effect
+      navItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("slide-in-left");
+        }, index * 50);
+      });
+    }
+  }
+
+  // Menu toggle button click
+  menuToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Close menu when clicking on nav links
+  navItems.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      // For mobile menu, handle the navigation properly
+      if (navLinks.classList.contains("active")) {
+        e.preventDefault(); // Prevent default to handle manually
+
+        const targetId = link.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          // Close menu first
+          toggleMenu(true);
+
+          // Wait for menu close animation to complete, then scroll
+          setTimeout(() => {
+            const headerHeight = document.querySelector("header").offsetHeight;
+            const targetPosition = targetElement.offsetTop - headerHeight - 20;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+
+            // Update active nav link
+            updateActiveNavLink(targetId);
+          }, 300); // Wait for menu close animation
+        }
+      }
+
+      // Update active state
+      navItems.forEach((item) => item.classList.remove("active"));
+      link.classList.add("active");
     });
+  });
+
+  // Handle close button click (using pseudo-element, so we'll use position-based detection)
+  navLinks.addEventListener("click", (e) => {
+    const rect = navLinks.getBoundingClientRect();
+    const closeButtonArea = {
+      left: rect.right - 74, // 44px button + 30px margin
+      right: rect.right - 30,
+      top: rect.top + 30,
+      bottom: rect.top + 74, // 44px button + 30px margin
+    };
+
+    // Check if click is in close button area
+    if (
+      e.clientX >= closeButtonArea.left &&
+      e.clientX <= closeButtonArea.right &&
+      e.clientY >= closeButtonArea.top &&
+      e.clientY <= closeButtonArea.bottom
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu(true);
+    }
+
+    // Also close if clicking on the overlay background (not on menu items)
+    if (e.target === navLinks) {
+      toggleMenu(true);
+    }
   });
 
   // Close menu on window resize
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
-      navLinks.classList.remove("active");
-      menuToggle.classList.remove("active");
-      document.body.style.overflow = "auto";
+      toggleMenu(true);
     }
   });
+
+  // Close menu on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && navLinks.classList.contains("active")) {
+      toggleMenu(true);
+    }
+  });
+
+  // Touch support for mobile devices
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  navLinks.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    },
+    { passive: true }
+  );
+
+  navLinks.addEventListener(
+    "touchmove",
+    (e) => {
+      if (!navLinks.classList.contains("active")) return;
+
+      const touchY = e.touches[0].clientY;
+      const touchX = e.touches[0].clientX;
+      const deltaY = touchY - touchStartY;
+      const deltaX = touchX - touchStartX;
+
+      // Close menu on swipe left (if significant horizontal movement)
+      if (deltaX < -100 && Math.abs(deltaY) < 50) {
+        toggleMenu(true);
+      }
+    },
+    { passive: true }
+  );
+
+  // Prevent body scroll when menu is open
+  navLinks.addEventListener(
+    "touchmove",
+    (e) => {
+      if (navLinks.classList.contains("active")) {
+        e.preventDefault();
+      }
+    },
+    { passive: false }
+  );
+
+  // Update active nav link based on scroll position
+  function updateActiveNavOnScroll() {
+    const sections = document.querySelectorAll("section[id]");
+    const scrollPos = window.scrollY + 100;
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute("id");
+
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        navItems.forEach((item) => {
+          item.classList.remove("active");
+          if (item.getAttribute("href") === `#${sectionId}`) {
+            item.classList.add("active");
+          }
+        });
+      }
+    });
+  }
+
+  // Throttled scroll listener for active nav updates
+  let scrollTicking = false;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          updateActiveNavOnScroll();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  // Initialize active nav link on page load
+  updateActiveNavOnScroll();
 }
 
 // Enhanced Menu Filtering with animations

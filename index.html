@@ -117,14 +117,15 @@
     <header>
         <div class="container">
             <nav>
-                <h1 class="logo">فروج<span>رنا</span></h1>
+                <h1 class="logo">فروج <span>رنا</span></h1>
                 <ul class="nav-links">
                     <li><a href="#home" class="active">الرئيسية - Home</a></li>
                     <li><a href="#about">عنا - About</a></li>
-                    <li><a href="#specialties">مميزاتنا - Specialties</a></li>
                     <li><a href="#menu">القائمة - Menu</a></li>
-                    <li><a href="#gallery">المعرض - Gallery</a></li>
-                    <li><a href="#testimonials">آراء العملاء - Reviews</a></li>
+                    <li><a href="#specialties">مميزاتنا - Specialties</a></li>
+                    <!-- Hidden for future use -->
+                    <li style="display: none;"><a href="#gallery">المعرض - Gallery</a></li>
+                    <li style="display: none;"><a href="#testimonials">آراء العملاء - Reviews</a></li>
                     <li><a href="#contact">اتصل بنا - Contact</a></li>
                 </ul>
                 <button class="menu-toggle" aria-label="Toggle mobile menu">
@@ -168,26 +169,41 @@
         </div>
     </section>
 
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            
+            <!-- New Menu Images Display -->
+            <div class="menu-images-container">
+                <div class="menu-image-item">
+                    <img src="2.png" alt="Farooj Rana Menu Page 1" loading="lazy">
+                </div>
+                <div class="menu-image-item">
+                    <img src="3.png" alt="Farooj Rana Menu Page 2" loading="lazy">
+                </div>
+                <div class="menu-image-item">
+                    <img src="4.png" alt="Farooj Rana Menu Page 3" loading="lazy">
+                </div>
+            </div>
+            
+            <!-- Hidden for future use -->
+            <div class="menu-tabs" id="menu-tabs" style="display: none;">
+                <div class="menu-tab active" data-category="all">All</div>
+                <!-- Menu categories will be loaded from config.js -->
+            </div>
+            <div class="menu-items" id="menu-items" style="display: none;">
+                <!-- Menu items will be loaded from config.js -->
+            </div>
+        </div>
+    </section>
+
     <!-- Specialties Section -->
     <section id="specialties" class="specialties">
         <div class="container">
             <h2 class="section-title">Our Specialties</h2>
             <div class="specialties-grid" id="specialties-container">
                 <!-- Specialties will be loaded from config.js -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Menu Section -->
-    <section id="menu" class="menu">
-        <div class="container">
-            <h2 class="section-title">Our Menu</h2>
-            <div class="menu-tabs" id="menu-tabs">
-                <div class="menu-tab active" data-category="all">All</div>
-                <!-- Menu categories will be loaded from config.js -->
-            </div>
-            <div class="menu-items" id="menu-items">
-                <!-- Menu items will be loaded from config.js -->
             </div>
         </div>
     </section>
@@ -297,7 +313,9 @@
                         <li><a href="#home">الرئيسية - Home</a></li>
                         <li><a href="#about">عنا - About Us</a></li>
                         <li><a href="#menu">القائمة - Menu</a></li>
-                        <li><a href="#gallery">المعرض - Gallery</a></li>
+                        <li><a href="#specialties">مميزاتنا - Specialties</a></li>
+                        <!-- Hidden for future use -->
+                        <li style="display: none;"><a href="#gallery">المعرض - Gallery</a></li>
                         <li><a href="#contact">اتصل بنا - Contact</a></li>
                     </ul>
                 </div>
@@ -335,10 +353,10 @@
     </div>
 
     <!-- Delivery Badge -->
-    <div class="delivery-badge">
+    <a href="#contact" class="delivery-badge">
         <i class="fas fa-truck"></i>
         يوجد توصيل - Delivery Available
-    </div>
+    </a>
 
     <!-- Scripts -->
     <script src="config.js"></script>
@@ -376,24 +394,24 @@
                 specialtiesContainer.appendChild(specialtyCard);
             });
             
-            // Menu tabs
-            const menuTabs = document.getElementById('menu-tabs');
-            config.menuCategories.forEach(category => {
-                const tab = document.createElement('div');
-                tab.className = 'menu-tab';
-                tab.dataset.category = category.id;
-                tab.textContent = category.name;
-                menuTabs.appendChild(tab);
-            });
+            // Menu tabs - temporarily disabled
+            // const menuTabs = document.getElementById('menu-tabs');
+            // config.menuCategories.forEach(category => {
+            //     const tab = document.createElement('div');
+            //     tab.className = 'menu-tab';
+            //     tab.dataset.category = category.id;
+            //     tab.textContent = category.name;
+            //     menuTabs.appendChild(tab);
+            // });
             
-            // Gallery
-            const galleryContainer = document.getElementById('gallery-container');
-            config.galleryImages.forEach(image => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                galleryItem.innerHTML = `<img src="${image}" alt="Gallery Image">`;
-                galleryContainer.appendChild(galleryItem);
-            });
+            // Gallery - temporarily disabled
+            // const galleryContainer = document.getElementById('gallery-container');
+            // config.galleryImages.forEach(image => {
+            //     const galleryItem = document.createElement('div');
+            //     galleryItem.className = 'gallery-item';
+            //     galleryItem.innerHTML = `<img src="${image}" alt="Gallery Image">`;
+            //     galleryContainer.appendChild(galleryItem);
+            // });
             
             // Contact info
             document.getElementById('contact-address').textContent = config.address;

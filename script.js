@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothScroll();
   initHeaderScroll();
   initMobileMenu();
-  initMenuFiltering();
-  initTestimonials();
-  initGalleryLightbox();
+  // Temporarily disabled - keep for future use
+  // initMenuFiltering();
+  // initTestimonials();
+  // initGalleryLightbox();
   initContactForm();
   initBackToTop();
   initScrollAnimations();

@@ -745,10 +745,18 @@ nav {
     display: block;
     object-fit: contain;
     max-width: 100%;
+    /* Enhanced WebP rendering optimization */
+    image-rendering: auto;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    image-rendering: pixelated;
     image-rendering: optimizeQuality;
+    /* WebP-specific optimizations */
+    image-orientation: from-image;
+    object-position: center;
+    /* Performance optimizations for WebP */
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 /* Ensure images maintain aspect ratio on all devices */

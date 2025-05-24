@@ -72,8 +72,9 @@ function updateActiveNavLink(targetId) {
 function initHeaderScroll() {
   let lastScrollY = window.scrollY;
   const header = document.querySelector("header");
+  let ticking = false;
 
-  window.addEventListener("scroll", () => {
+  function updateHeader() {
     const currentScrollY = window.scrollY;
 
     // Add scrolled class for styling
@@ -83,15 +84,25 @@ function initHeaderScroll() {
       header.classList.remove("scrolled");
     }
 
-    // Hide/show header on scroll direction
+    // Hide/show header on scroll direction with CSS classes instead of direct style manipulation
     if (currentScrollY > lastScrollY && currentScrollY > 100) {
-      header.style.transform = "translateY(-100%)";
+      header.classList.add("header-hidden");
     } else {
-      header.style.transform = "translateY(0)";
+      header.classList.remove("header-hidden");
     }
 
     lastScrollY = currentScrollY;
-  });
+    ticking = false;
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", requestTick, { passive: true });
 }
 
 // Enhanced Mobile Menu with animations
@@ -157,6 +168,9 @@ function initMenuFiltering() {
   // Add click event to menu tabs
   menuTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
+      // Prevent multiple clicks during animation
+      if (menuContainer.classList.contains("filtering")) return;
+
       // Remove active class from all tabs
       menuTabs.forEach((t) => t.classList.remove("active"));
 
@@ -165,14 +179,11 @@ function initMenuFiltering() {
 
       const category = tab.dataset.category;
 
-      // Fade out current items
-      const currentItems = menuContainer.querySelectorAll(".menu-item");
-      currentItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.style.opacity = "0";
-          item.style.transform = "translateY(20px)";
-        }, index * 50);
-      });
+      // Add filtering class to prevent multiple clicks
+      menuContainer.classList.add("filtering");
+
+      // Fade out current items using CSS class
+      menuContainer.classList.add("fade-out");
 
       // Filter and render new items after fade out
       setTimeout(() => {
@@ -184,6 +195,12 @@ function initMenuFiltering() {
           );
           renderMenuItems(filteredItems);
         }
+
+        // Remove fade out class and filtering lock
+        menuContainer.classList.remove("fade-out");
+        setTimeout(() => {
+          menuContainer.classList.remove("filtering");
+        }, 100);
       }, 300);
     });
   });
@@ -199,8 +216,6 @@ function renderMenuItems(items) {
   items.forEach((item, index) => {
     const menuItemElement = document.createElement("div");
     menuItemElement.className = "menu-item";
-    menuItemElement.style.opacity = "0";
-    menuItemElement.style.transform = "translateY(30px)";
 
     let dietaryTags = "";
     if (item.isVegetarian)
@@ -214,30 +229,30 @@ function renderMenuItems(items) {
       dietaryTags += '<span class="menu-item-tag spicy">Spicy</span>';
 
     menuItemElement.innerHTML = `
-      <div class="menu-item-image">
-        <img src="${item.imageUrl}" alt="${item.name}" loading="lazy">
-      </div>
-      <div class="menu-item-content">
-        <div class="menu-item-header">
-          <h3>${item.name}</h3>
-          <div class="menu-item-price">$${item.price.toFixed(2)}</div>
-        </div>
-        <p class="menu-item-description">${item.description}</p>
-        <div class="menu-item-tags">
-          ${dietaryTags}
-        </div>
-      </div>
-    `;
+            <div class="menu-item-image">
+        <img src="${item.imageUrl}" alt="${
+      item.name
+    }" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop&crop=center'">
+            </div>
+            <div class="menu-item-content">
+                <div class="menu-item-header">
+                    <h3>${item.name}</h3>
+                    <div class="menu-item-price">${item.price.toFixed(
+                      2
+                    )} ر.س</div>
+                </div>
+                <p class="menu-item-description">${item.description}</p>
+                <div class="menu-item-tags">
+                    ${dietaryTags}
+                </div>
+            </div>
+        `;
 
     menuContainer.appendChild(menuItemElement);
 
-    // Animate items in with stagger
-    setTimeout(() => {
-      menuItemElement.style.transition =
-        "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-      menuItemElement.style.opacity = "1";
-      menuItemElement.style.transform = "translateY(0)";
-    }, index * 100);
+    // Use CSS animation instead of JavaScript style manipulation
+    menuItemElement.style.animationDelay = `${index * 0.1}s`;
+    menuItemElement.classList.add("menu-item-enter");
   });
 }
 
@@ -284,22 +299,22 @@ function initTestimonials() {
   function renderTestimonial(index) {
     const testimonial = testimonials[index];
     testimonialContainer.innerHTML = `
-      <div class="testimonial fade-in">
-        <div class="testimonial-image">
+            <div class="testimonial fade-in">
+                <div class="testimonial-image">
           <img src="${testimonial.imageUrl}" alt="${
       testimonial.name
     }" loading="lazy">
-        </div>
-        <div class="testimonial-content">
+                </div>
+                <div class="testimonial-content">
           <p>"${testimonial.text}"</p>
-        </div>
-        <div class="testimonial-rating">
+                </div>
+                <div class="testimonial-rating">
           ${"★".repeat(testimonial.rating)}${"☆".repeat(5 - testimonial.rating)}
-        </div>
-        <div class="testimonial-name">${testimonial.name}</div>
+                </div>
+                <div class="testimonial-name">${testimonial.name}</div>
         <div class="testimonial-title">${testimonial.title || "Customer"}</div>
-      </div>
-    `;
+            </div>
+        `;
   }
 
   function updateDots(activeIndex) {
@@ -530,13 +545,10 @@ function initBackToTop() {
   const backToTopButton = document.querySelector(".back-to-top");
   if (!backToTopButton) return;
 
-  let scrollProgress = 0;
+  let ticking = false;
 
-  window.addEventListener("scroll", () => {
+  function updateBackToTop() {
     const scrollTop = window.scrollY;
-    const documentHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-    scrollProgress = scrollTop / documentHeight;
 
     if (scrollTop > 300) {
       backToTopButton.classList.add("active");
@@ -544,11 +556,17 @@ function initBackToTop() {
       backToTopButton.classList.remove("active");
     }
 
-    // Add scroll progress indicator
-    backToTopButton.style.background = `conic-gradient(var(--primary-color) ${
-      scrollProgress * 360
-    }deg, rgba(255, 107, 53, 0.2) 0deg)`;
-  });
+    ticking = false;
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateBackToTop);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", requestTick, { passive: true });
 
   backToTopButton.addEventListener("click", () => {
     window.scrollTo({
@@ -570,18 +588,21 @@ function initScrollAnimations() {
       if (entry.isIntersecting) {
         const element = entry.target;
 
-        // Add appropriate animation class based on element type
-        if (element.classList.contains("specialty-card")) {
-          element.classList.add("fade-in");
-        } else if (element.classList.contains("menu-item")) {
-          element.classList.add("slide-in-left");
-        } else if (element.classList.contains("testimonial")) {
-          element.classList.add("fade-in");
-        } else if (element.classList.contains("gallery-item")) {
-          element.classList.add("slide-in-right");
-        } else {
-          element.classList.add("fade-in");
-        }
+        // Use requestAnimationFrame for smooth animations
+        requestAnimationFrame(() => {
+          // Add appropriate animation class based on element type
+          if (element.classList.contains("specialty-card")) {
+            element.classList.add("fade-in");
+          } else if (element.classList.contains("menu-item")) {
+            element.classList.add("slide-in-left");
+          } else if (element.classList.contains("testimonial")) {
+            element.classList.add("fade-in");
+          } else if (element.classList.contains("gallery-item")) {
+            element.classList.add("slide-in-right");
+          } else {
+            element.classList.add("fade-in");
+          }
+        });
 
         observer.unobserve(element);
       }
@@ -602,10 +623,15 @@ function initScrollAnimations() {
   animationElements.forEach((el) => observer.observe(el));
 }
 
-// Particle Effect for Hero Section
+// Particle Effect for Hero Section (Optimized)
 function initParticleEffect() {
   const hero = document.querySelector(".hero");
   if (!hero) return;
+
+  // Check if user prefers reduced motion
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -622,22 +648,25 @@ function initParticleEffect() {
 
   hero.appendChild(canvas);
 
+  let animationId;
+  let isVisible = true;
+
   function resizeCanvas() {
     canvas.width = hero.offsetWidth;
     canvas.height = hero.offsetHeight;
   }
 
   const particles = [];
-  const particleCount = 50;
+  const particleCount = 30; // Reduced from 50
 
   class Particle {
     constructor() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
-      this.radius = Math.random() * 2 + 1;
-      this.opacity = Math.random() * 0.5 + 0.2;
+      this.vx = (Math.random() - 0.5) * 0.3; // Reduced speed
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.radius = Math.random() * 1.5 + 0.5; // Smaller particles
+      this.opacity = Math.random() * 0.3 + 0.1; // Reduced opacity
     }
 
     update() {
@@ -652,7 +681,7 @@ function initParticleEffect() {
       ctx.globalAlpha = this.opacity;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255, 107, 53, 0.6)";
+      ctx.fillStyle = "rgba(255, 215, 0, 0.4)"; // Changed to golden color
       ctx.fill();
     }
   }
@@ -663,6 +692,8 @@ function initParticleEffect() {
   }
 
   function animate() {
+    if (!isVisible) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach((particle) => {
@@ -670,13 +701,33 @@ function initParticleEffect() {
       particle.draw();
     });
 
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
   }
+
+  // Intersection Observer to pause animation when not visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && !animationId) {
+        animate();
+      } else if (!isVisible && animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    });
+  });
+
+  observer.observe(hero);
 
   resizeCanvas();
   animate();
 
-  window.addEventListener("resize", resizeCanvas);
+  // Throttled resize handler
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resizeCanvas, 250);
+  });
 }
 
 // Utility function for notifications

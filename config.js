@@ -48,19 +48,22 @@ const config = {
       name: "Shawarma",
       description:
         "Tender marinated meat, slow-roasted on a vertical rotisserie, served with fresh vegetables and our special sauce.",
-      imageUrl: "img/specials/shawarma.jpg",
+      imageUrl:
+        "https://source.unsplash.com/400x300/?shawarma,middle-eastern-food",
     },
     {
       name: "Grilled Kababs",
       description:
         "Premium cuts of meat, marinated in our special blend of spices, grilled to perfection.",
-      imageUrl: "img/specials/kababs.jpg",
+      imageUrl:
+        "https://source.unsplash.com/400x300/?kabab,grilled-meat,middle-eastern",
     },
     {
       name: "Falafel",
       description:
         "Crispy on the outside, fluffy on the inside, our falafel is made fresh daily with a perfect blend of chickpeas and herbs.",
-      imageUrl: "img/specials/falafel.jpg",
+      imageUrl:
+        "https://source.unsplash.com/400x300/?falafel,chickpeas,vegetarian",
     },
   ],
 
@@ -97,7 +100,8 @@ const config = {
       price: 6.99,
       description:
         "Creamy chickpea dip with tahini, olive oil, and spices. Served with fresh pita bread.",
-      imageUrl: "img/menu/hummus.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?hummus,chickpeas,mediterranean",
       isVegetarian: true,
       isVegan: true,
       isGlutenFree: false,
@@ -110,7 +114,8 @@ const config = {
       price: 7.99,
       description:
         "Smoky eggplant dip with tahini, garlic, and lemon juice. Served with fresh pita bread.",
-      imageUrl: "img/menu/baba-ganoush.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?baba-ganoush,eggplant,mediterranean",
       isVegetarian: true,
       isVegan: true,
       isGlutenFree: false,
@@ -123,7 +128,8 @@ const config = {
       price: 15.99,
       description:
         "Marinated chicken, slow-roasted on a vertical rotisserie, served with rice, salad, and pita bread.",
-      imageUrl: "img/menu/chicken-shawarma.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?chicken-shawarma,middle-eastern,rice",
       isVegetarian: false,
       isVegan: false,
       isGlutenFree: false,
@@ -136,7 +142,8 @@ const config = {
       price: 17.99,
       description:
         "Premium beef, marinated in our special blend of spices, grilled to perfection. Served with rice, salad, and pita bread.",
-      imageUrl: "img/menu/beef-kabab.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?beef-kabab,grilled-meat,skewer",
       isVegetarian: false,
       isVegan: false,
       isGlutenFree: false,
@@ -149,7 +156,8 @@ const config = {
       price: 13.99,
       description:
         "Crispy falafel balls made with chickpeas and herbs. Served with tahini sauce, rice, salad, and pita bread.",
-      imageUrl: "img/menu/falafel-plate.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?falafel-plate,vegetarian,middle-eastern",
       isVegetarian: true,
       isVegan: true,
       isGlutenFree: false,
@@ -162,7 +170,8 @@ const config = {
       price: 4.99,
       description:
         "Fragrant basmati rice cooked with aromatic spices and herbs.",
-      imageUrl: "img/menu/rice-pilaf.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?rice-pilaf,basmati-rice,aromatic",
       isVegetarian: true,
       isVegan: true,
       isGlutenFree: true,
@@ -175,7 +184,8 @@ const config = {
       price: 5.99,
       description:
         "Layers of flaky pastry filled with chopped nuts and sweetened with honey syrup.",
-      imageUrl: "img/menu/baklava.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?baklava,pastry,honey,nuts",
       isVegetarian: true,
       isVegan: false,
       isGlutenFree: false,
@@ -187,7 +197,8 @@ const config = {
       category: "beverages",
       price: 3.99,
       description: "Strong, rich coffee served in a traditional coffee pot.",
-      imageUrl: "img/menu/turkish-coffee.jpg",
+      imageUrl:
+        "https://source.unsplash.com/300x200/?turkish-coffee,traditional,pot",
       isVegetarian: true,
       isVegan: true,
       isGlutenFree: true,
@@ -199,35 +210,47 @@ const config = {
   testimonials: [
     {
       name: "Sarah Johnson",
-      comment:
-        "The best Middle Eastern food I've had outside of the Middle East. Authentic flavors and great service!",
+      text: "The best Middle Eastern food I've had outside of the Middle East. Authentic flavors and great service! Every bite transports you to the heart of the Mediterranean.",
+      title: "Food Blogger",
       rating: 5,
-      imageUrl: "img/testimonials/person1.jpg",
+      imageUrl:
+        "https://source.unsplash.com/100x100/?woman,portrait,professional",
     },
     {
       name: "Michael Rodriguez",
-      comment:
-        "Their shawarma is to die for! I come here at least once a week for my fix. Highly recommend!",
+      text: "Their shawarma is to die for! I come here at least once a week for my fix. The meat is perfectly seasoned and the vegetables are always fresh. Highly recommend!",
+      title: "Regular Customer",
       rating: 5,
-      imageUrl: "img/testimonials/person2.jpg",
+      imageUrl: "https://source.unsplash.com/100x100/?man,portrait,casual",
     },
     {
       name: "Jennifer Lee",
-      comment:
-        "Delicious food, generous portions, and reasonable prices. What more could you ask for?",
+      text: "Delicious food, generous portions, and reasonable prices. The staff is incredibly welcoming and the atmosphere is perfect for both family dinners and date nights.",
+      title: "Local Resident",
       rating: 4,
-      imageUrl: "img/testimonials/person3.jpg",
+      imageUrl: "https://source.unsplash.com/100x100/?woman,portrait,smile",
+    },
+    {
+      name: "Ahmed Hassan",
+      text: "As someone from the Middle East, I can say this is authentic cuisine at its finest. The spices are perfectly balanced and remind me of home. Exceptional quality!",
+      title: "Cultural Expert",
+      rating: 5,
+      imageUrl:
+        "https://source.unsplash.com/100x100/?man,portrait,middle-eastern",
     },
   ],
 
-  // Gallery Images
+  // Enhanced Gallery Images
   galleryImages: [
-    "img/gallery/restaurant-1.jpg",
-    "img/gallery/food-1.jpg",
-    "img/gallery/chef-1.jpg",
-    "img/gallery/restaurant-2.jpg",
-    "img/gallery/food-2.jpg",
-    "img/gallery/food-3.jpg",
+    "https://source.unsplash.com/600x600/?middle-eastern-restaurant,interior",
+    "https://source.unsplash.com/600x600/?shawarma,food,delicious",
+    "https://source.unsplash.com/600x600/?chef,cooking,kitchen",
+    "https://source.unsplash.com/600x600/?restaurant,dining,atmosphere",
+    "https://source.unsplash.com/600x600/?kabab,grilled,meat",
+    "https://source.unsplash.com/600x600/?falafel,vegetarian,middle-eastern",
+    "https://source.unsplash.com/600x600/?hummus,appetizer,mediterranean",
+    "https://source.unsplash.com/600x600/?baklava,dessert,pastry",
+    "https://source.unsplash.com/600x600/?restaurant,outdoor,seating",
   ],
 
   // Theme Colors (CSS variables)

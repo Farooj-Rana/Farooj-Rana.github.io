@@ -4,15 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farooj Rana | Authentic Middle Eastern Cuisine</title>
-    <meta name="description" content="Experience authentic Middle Eastern cuisine at Farooj Rana. Fresh ingredients, traditional recipes, unforgettable taste.">
+    <meta name="description" content="Experience authentic Middle Eastern cuisine at Farooj Rana. Fresh ingredients, traditional recipes, unforgettable taste. Best Middle Eastern restaurant with premium shawarma, kababs, and falafel.">
+    <meta name="keywords" content="Middle Eastern restaurant, authentic cuisine, shawarma, kababs, falafel, Mediterranean food, halal restaurant">
+    <meta name="author" content="Farooj Rana Restaurant">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://farooj-rana.github.io/">
+    <meta property="og:title" content="Farooj Rana | Authentic Middle Eastern Cuisine">
+    <meta property="og:description" content="Experience authentic Middle Eastern cuisine at Farooj Rana. Fresh ingredients, traditional recipes, unforgettable taste.">
+    <meta property="og:image" content="https://farooj-rana.github.io/img/hero-preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://farooj-rana.github.io/">
+    <meta property="twitter:title" content="Farooj Rana | Authentic Middle Eastern Cuisine">
+    <meta property="twitter:description" content="Experience authentic Middle Eastern cuisine at Farooj Rana. Fresh ingredients, traditional recipes, unforgettable taste.">
+    <meta property="twitter:image" content="https://farooj-rana.github.io/img/hero-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="styles.css" as="style">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Farooj Rana",
+      "image": "https://farooj-rana.github.io/img/restaurant-logo.jpg",
+      "description": "Authentic Middle Eastern cuisine with fresh ingredients and traditional recipes",
+      "servesCuisine": "Middle Eastern",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Culinary Street",
+        "addressLocality": "Foodville",
+        "postalCode": "12345",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "40.7128",
+        "longitude": "-74.0060"
+      },
+      "telephone": "+1-123-456-7890",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "11:00",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "11:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "10:00",
+          "closes": "21:00"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
-    <!-- Preloader -->
+    <!-- Enhanced Preloader -->
     <div class="preloader">
         <div class="loader"></div>
+        <div style="margin-top: 20px; font-family: 'Playfair Display', serif; font-size: 18px; color: var(--primary-color); font-weight: 600;">Loading Authentic Flavors...</div>
     </div>
 
     <!-- Header -->
@@ -29,9 +110,9 @@
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <div class="menu-toggle">
+                <button class="menu-toggle" aria-label="Toggle mobile menu">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </nav>
         </div>
     </header>

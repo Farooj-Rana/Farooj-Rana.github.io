@@ -986,6 +986,8 @@ nav {
     align-items: center;
     max-width: 400px;
     margin: 0 auto;
+    direction: ltr; /* Override RTL for proper day:time order */
+    text-align: left; /* Ensure left-to-right text alignment */
 }
 
 .day {
@@ -993,6 +995,7 @@ nav {
     color: var(--secondary-color);
     text-transform: capitalize;
     font-size: var(--font-size-lg);
+    text-align: left; /* Ensure day appears on the left */
 }
 
 .day::after {
@@ -1002,7 +1005,7 @@ nav {
 
 .time {
     color: var(--gray-color);
-    text-align: right;
+    text-align: left; /* Change from right to left alignment */
     font-weight: 500;
     font-size: var(--font-size-lg);
 }
@@ -1505,16 +1508,19 @@ footer::before {
         grid-template-columns: 1fr;
         gap: var(--space-md);
         text-align: center;
+        direction: ltr; /* Override RTL for proper display */
+        max-width: 100%;
     }
     
     .day {
         border-bottom: 1px solid var(--gray-light);
         padding-bottom: var(--space-sm);
         font-size: var(--font-size-base);
+        text-align: center; /* Center align for mobile */
     }
     
     .time {
-        text-align: center;
+        text-align: center; /* Center align for mobile */
         margin-bottom: var(--space-md);
         font-size: var(--font-size-base);
     }
@@ -2129,15 +2135,15 @@ header,
         grid-template-columns: 1fr;
         gap: var(--space-md);
         text-align: center;
+        direction: ltr; /* Override RTL for proper display */
         max-width: 100%;
     }
 
     .day {
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: 1px solid var(--gray-light);
         padding-bottom: var(--space-sm);
         font-size: var(--font-size-base);
-        font-weight: 700;
-        color: var(--secondary-color);
+        text-align: center; /* Center align for mobile */
     }
 
     .day::after {
@@ -2146,11 +2152,9 @@ header,
     }
 
     .time {
-        text-align: center;
+        text-align: center; /* Center align for mobile */
         margin-bottom: var(--space-md);
         font-size: var(--font-size-base);
-        font-weight: 500;
-        color: var(--gray-color);
     }
 
     .social-links {
@@ -2376,18 +2380,31 @@ header,
     .hours-list {
         grid-template-columns: auto 1fr;
         gap: var(--space-lg) var(--space-xl);
-        text-align: left;
+        align-items: center;
         max-width: 400px;
+        margin: 0 auto;
+        direction: ltr; /* Override RTL for proper day:time order */
+        text-align: left; /* Ensure left-to-right text alignment */
     }
 
     .day {
-        border-bottom: none;
-        text-align: left;
+        font-weight: 700;
+        color: var(--secondary-color);
+        text-transform: capitalize;
+        font-size: var(--font-size-lg);
+        text-align: left; /* Ensure day appears on the left */
+    }
+
+    .day::after {
+        content: ':';
+        margin-left: 2px;
     }
 
     .time {
-        text-align: right;
-        margin-bottom: 0;
+        color: var(--gray-color);
+        text-align: left; /* Change from right to left alignment */
+        font-weight: 500;
+        font-size: var(--font-size-lg);
     }
 
     .delivery-badge {
